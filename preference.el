@@ -19,10 +19,23 @@
 ;; Line number
 (require 'linum)
 (linum-mode t)
-(define-key global-map [f6] `linum-mode)
+(define-key global-map [f9] `linum-mode)
+
+;; set rmail-file-name
+
 
 ;; highlight the matched parens
-(setq show-paren-moe t)
+;;(setq show-paren-moe t)
+
+
+
+;; shift+arrow to select text
+(setq shift-select-mode t)
+(delete-selection-mode 1)
+
+;; down arrow key by visual line
+(setq line-move-visual t)
+
 
 ;; highlight current line
 (global-hl-line-mode nil)
@@ -47,16 +60,34 @@
 ;; Show which function I am in
 (which-function-mode)
 
+;; Show Paren
+(show-paren-mode t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Perforce
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; load perforce support
+(load-library "p4")
+(p4-set-client-name "weig_unix")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Perforce
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'git)
+(require 'git-blame)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Tabbar
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;(require 'tabbar)
-;(tabbar-mode)
-;(setq-default cursor-type 'bar)
+(require 'tabbar)
+(tabbar-mode)
+(setq-default cursor-type 'bar)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Color Theme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/color-theme"))
+
 (require 'color-theme)
 (setq color-theme-is-global t)
 (color-theme-initialize)
@@ -64,14 +95,39 @@
 ;;(color-theme-comidia)
 (color-theme-clarity)
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Solarized Color Theme
+;; iBuffer 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/solarized-color"))
-;;(load-file (expand-file-name "~/.emacs.d/solarized-color/color-theme-solarized.el"))
-(require 'color-theme-solarized)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(autoload 'ibuffer "ibuffer" "List buffers." t)
 
+;;(setq ibuffer-display-summary nil)
+
+;; Gnus-style grouping
+(setq ibuffer-saved-filter-groups
+      (quote (("default"
+	       ("dired" (mode . dired-mode))
+	       ("perl" (mode . cperl-mode))
+	       ("erc" (mode . erc-mode))
+	       ("planner" (or
+			   (name . "^\\*Calendar\\*$")
+			   (name . "^diary$")
+			   (mode . muse-mode)))
+	       ("emacs" (or
+			 (name . "^\\*scratch\\*$")
+			 (name . "^\\*Messages\\*$")))
+	       ("gnus" (or
+			(mode . message-mode)
+			(mode . bbdb-mode)
+			(mode . mail-mode)
+			(mode . gnus-group-mode)
+			(mode . gnus-summary-mode)
+			(mode . gnus-article-mode)
+			(name . "^\\.bbdb$")
+			(name . "^\\.newsrc-dribble")))))))
+(add-hook 'ibuffer-mode-hook
+	  (lambda ()
+	    (ibuffer-switch-to-saved-filter-groups "default")))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -79,15 +135,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
-(make-directory "/tmp/dvilla.emacs.bk/autosaves/" t)
-(make-directory "/tmp/dvilla.emacs.bk/backups/" t)
+(make-directory "/tmp/weig.emacs.bk/autosaves/" t)
+(make-directory "/tmp/weig.emacs.bk/backups/" t)
 (custom-set-variables
-  '(auto-save-file-name-transforms '((".*" "/tmp/dvilla.emacs.bk/autosaves/\\1" t)))
-  '(backup-directory-alist '((".*" . "/tmp/dvilla.emacs.bk/backups/"))))
+  '(auto-save-file-name-transforms '((".*" "/tmp/weig.emacs.bk/autosaves/\\1" t)))
+  '(backup-directory-alist '((".*" . "/tmp/weig.emacs.bk/backups/"))))
 
 
-;; create the autosave dir if necessary, since emacs won't.
-;;(make-directory "~/.emacs.d/autosaves/" t)
+;; ;; create the autosave dir if necessary, since emacs won't.
+;; (make-directory "~/.emacs.d/autosaves/" t)
 
 ;; (defvar user-temporary-file-directory
 ;;   (concat temporary-file-directory user-login-name ".emacs.tmpfile" "/"))
@@ -142,3 +198,18 @@
 
 (global-set-key "\M-p" 'move-text-up)
 (global-set-key "\M-n" 'move-text-down)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Uniquify
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
+(setq uniquify-separator "/")
+(setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
+(setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Powerline
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(require 'powerline)
+;;(powerline-default)
