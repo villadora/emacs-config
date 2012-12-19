@@ -7,7 +7,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Outline Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(outline-minor-mode t)
+(outline-minor-mode 0)
 
 ; Outline-minor-mode key map
 (define-prefix-command 'cm-map nil "Outline-")
@@ -61,6 +61,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CEDET -- Collection of Emacs Development Environment Tools
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/cedet-1.0pre7/common"))
+(load-file (expand-file-name "~/.custom/emacs.conf/cedet-1.0pre7/common/cedet.el"))
+
 ;; CEDET
 (require 'cedet)
 
@@ -153,6 +156,37 @@
 (add-hook 'c++-mode-hook 'my-cedet-h-cpp-sw-self-in-hook)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; JDE -- Java Development Environment
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/jdee-2.4.0.1/lisp"))
+
+;; If you want Emacs to defer loading the JDE until you open a 
+;; Java file, edit the following line
+;; (setq defer-loading-jde nil)
+;; to read:
+;;
+(setq defer-loading-jde t)
+;;
+
+(if defer-loading-jde
+    (progn
+      (autoload 'jde-mode "jde" "JDE mode." t)
+      (setq auto-mode-alist
+	        (append
+		      '(("\\.java\\'" . jde-mode))
+		           auto-mode-alist)))
+  (require 'jde))
+
+
+;; Sets the basic indentation for Java source files
+;; to two spaces.
+(defun my-jde-mode-hook ()
+  (setq c-basic-offset 2))
+
+(add-hook 'jde-mode-hook 'my-jde-mode-hook)
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C/C++ Mode Settings
@@ -202,9 +236,12 @@
 (add-hook 'c-mode-hook 'my-c-mode-hook)
 
 
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ruby mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (expand-file-name "/ms/dist/ruby/misc"))
 
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 
@@ -301,8 +338,14 @@
 ;; Python Mode & Rope Uode Settings 
 ;; ( Not available in the firm )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(autoload 'python-mode "python-mode.el" "Python mode." t)
-(setq auto-mode-alist (append '(("/*.\.py$" . python-mode)) auto-mode-alist))
+
+;;(add-to-list 'load-path "/ms/dev/python/Pymacs/0.23/src/Pymacs-0.23/")
+;;(require 'pymacs)
+;;(setq pymacs-load-path '("/ms/dev/python/rope/0.9.2/src/rope-0.9.2/rope"
+;;          "/ms/dev/python/ropemacs/20100402/install/common/lib/ropemacs-0.6-py2.5.egg"
+;;          "/ms/dev/python/ropemode/20100402/install/common/lib/ropemode-0.1_rc2-py2.5.egg"))
+;;(pymacs-load "ropemacs" "rope-")
+
 
 
 
@@ -351,15 +394,30 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Nxml Mode 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/nxml-mode"))
+(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/nxml-mode"))
 
 ;; Make sure nxml-mode can autoload
-;(load "~/.custom/emacs.conf/nxml-mode/rng-auto.el")
+(load "~/.custom/emacs.conf/nxml-mode/rng-auto.el")
 
 ;; Load nxml-mode for files ending in .xml, .xsl, .rng, .xhtml
-;(add-to-list 'auto-mode-alist '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\)\\'" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\)\\'" . nxml-mode))
 ;;(message rng-schema-locating-files)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Html Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+"""(defun my-html-mode-hook ()
+  (setq tab-width 4)
+  (setq indent-tabs-mode t)"""
+;;  (define-key html-mode-map (kbd "<tab>") 'my-insert-tab)
+;;  (define-key html-mode-map (kbd "C->") 'sgml-close-tag))
+
+;;(defun my-insert-tab (&optional arg)
+;;  (interactive "P")
+;;  (insert-tab arg))
+
+;;(add-hook 'html-mode-hook 'my-html-mode-hook)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TWiki Editor
@@ -371,35 +429,44 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Actionscript Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;(load-file  (expand-file-name "~/.custom/emacs.conf/actionscript-mode-connors.el"))
-;(add-to-list 'auto-mode-alist '("\\.\\(as\\|mxml\\)$" . actionscript-mode))
+(load-file  (expand-file-name "~/.custom/emacs.conf/actionscript-mode-connors.el"))
+(add-to-list 'auto-mode-alist '("\\.\\(as\\|mxml\\)$" . actionscript-mode))
 ;;(require 'actionscript-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; YAML Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;(load-file (expand-file-name "~/.custom/emacs.conf/yaml-mode.el"))
+(load-file (expand-file-name "~/.custom/emacs.conf/yaml-mode.el"))
 
-;(add-hook 'yaml-mode-hook '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))) 
+(add-hook 'yaml-mode-hook '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))) 
 
-;(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Scala Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/scala-mode"))
+(require 'scala-mode-auto)
+(add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
+;;(add-to-list 'load-path "/path/to/ensime/dist")
+;;(require 'ensime)
+;;(add-hook 'scala-mode-hook 'ensime-scala-mode-hook) 
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Auto-complete Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/auto-complete"))
+(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/auto-complete"))
 
-;(require 'auto-complete-config)
-;(add-to-list 'ac-dictionary-directories "~/.custom/emacs.conf/auto-complete/ac-dict")
-;(ac-config-default)
-;(setq ac-use-quick-help t)
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.custom/emacs.conf/auto-complete/ac-dict")
+(ac-config-default)
+(setq ac-use-quick-help t)
 
 ;; Show x second later
-;(setq ac-auto-show-menu 0.4)
-;(setq ac-menu-height 12)
+(setq ac-auto-show-menu 0.4)
+(setq ac-menu-height 12)
 
 ;; Just ignore/distinguish case
 ;;(setq ac-ignore-case t)
@@ -422,22 +489,27 @@
 ;(add-hook 'c-mode-hook (lambda() (add-to-list 'ac-sources 'ac-sources-semantic)))
 
 
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Haskell Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;(load "~/.custom/emacs.conf/haskell-mode-2.8.0/haskell-site-file.el")
+(load "~/.custom/emacs.conf/haskell-mode-2.8.0/haskell-site-file.el")
 
-;(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Markdown Mode
+;; SCSS Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq exec-path (cons (expand-file-name "/ms/dist/ruby/PROJ/gems/common/bin/") exec-path))
 
-(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
-(setq auto-mode-alist (cons '("\\.markdown" . markdown-mode) auto-mode-alist))
+(setq scss-compile-at-save nil)
 
+(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/"))
+(autoload 'scss-mode "scss-mode")
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+(add-to-list 'ac-modes 'scss-mode)
