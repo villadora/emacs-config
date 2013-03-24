@@ -1,0 +1,3 @@
+;; load preference & mode
+
+(load-file (expand-file-name "~/.emacs.d/preference.el"))

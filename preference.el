@@ -64,29 +64,9 @@
 (show-paren-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Perforce
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; load perforce support
-(load-library "p4")
-(p4-set-client-name "weig_unix")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Perforce
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'git)
-(require 'git-blame)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Tabbar
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'tabbar)
-(tabbar-mode)
-(setq-default cursor-type 'bar)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Color Theme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/color-theme"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/color-theme"))
 
 (require 'color-theme)
 (setq color-theme-is-global t)
@@ -94,6 +74,13 @@
 ;;(color-theme-deep-blue)
 ;;(color-theme-comidia)
 (color-theme-clarity)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Solarized-Color
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/solarized-color"))
+(require 'color-theme-solarized)
+;;(color-theme-solarized-dark)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; iBuffer 
@@ -135,11 +122,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
-(make-directory "/tmp/weig.emacs.bk/autosaves/" t)
-(make-directory "/tmp/weig.emacs.bk/backups/" t)
+(make-directory "/tmp/emacs.bk/autosaves/" t)
+(make-directory "/tmp/emacs.bk/backups/" t)
 (custom-set-variables
-  '(auto-save-file-name-transforms '((".*" "/tmp/weig.emacs.bk/autosaves/\\1" t)))
-  '(backup-directory-alist '((".*" . "/tmp/weig.emacs.bk/backups/"))))
+  '(auto-save-file-name-transforms '((".*" "/tmp/emacs.bk/autosaves/\\1" t)))
+  '(backup-directory-alist '((".*" . "/tmp/emacs.bk/backups/"))))
 
 
 ;; ;; create the autosave dir if necessary, since emacs won't.
@@ -211,5 +198,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Powerline
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;(require 'powerline)
+(add-to-list 'load-path "~/.emacs.d/vendor/emacs-powerline")
+(require 'powerline)
 ;;(powerline-default)
