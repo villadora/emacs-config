@@ -94,22 +94,30 @@
 (global-ede-mode t)
 
 ;;-----------------------------------------
-;; Semantic
+;; Semantic (exten)
 ;;-----------------------------------------
-(require 'semantic-ia)
-;;(semantic-load-enable-minimum-features)
-(semantic-load-enable-code-helpers)
-;;(semantic-load-enable-guady-code-helpers)
-;;(semantic-load-enable-excessive-code-helpers)
-(semantic-load-enable-semantic-debugging-helpers)
+;;(load-file  (expand-file-name "~/.emacs.d/cedet.el"))
 
-;; Add include headers to system include path
-;;(semantic-add-system-include "~/exp/include/boost_1_37" 'c++-mode)
+; set semantic-mode
 
-;;(require 'semantic-gcc)
-;;(global-srecode-minor-mode t)
-;;(setq semantic-mru-bookmark-mode t)
-;;(setq semantic-mru-bookmark-ring nil)
+(custom-set-variables
+ '(semantic-default-submodes 
+   (quote 
+    (global-semantic-decoration-mode global-semantic-idle-completions-mode global-semantic-idle-scheduler-mode global-semanticdb-minor-mode global-semantic-idle-summary-mode global-semantic-mru-bookmark-mode)))
+ '(semantic-idle-scheduler-idle-time 3))
+
+(semantic-mode)
+
+
+;; semantic/ia
+
+(require 'semantic/ia)
+
+;;;; Include settings
+(require 'semantic/bovine/gcc)
+(require 'semantic/bovine/c)
+
+
 
 
 
@@ -121,7 +129,7 @@
   ;;  (list "." ".." "/ms/dev/OR/etsProduct/4.0/src" "/ms/dist/mstk/PROJ/msparts/4.0/include")
   )
 
-(require 'semantic-c nil 'noerror)
+;;(require 'semantic-c nil 'noerror)
 (let ((include-dirs cedet-user-include-dirs))
   (mapc (lambda (dir)
           (semantic-add-system-include dir 'c++-mode)
@@ -129,7 +137,9 @@
         include-dirs))
 
 
-
+;; semanticdb
+(setq semanticdb-default-save-directory 
+      (expand-file-name "~/.emacs.d/semanticdb"))
 
 ;; key settings for cedet
 (defun my-cedet-hook ()
@@ -448,7 +458,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Auto-complete Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/auto-complete"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/auto-complete"))
 (require 'auto-complete-config)
 
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/vendor/auto-complete/dict")

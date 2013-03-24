@@ -1,1 +1,4 @@
 *.elc
+ac-comphist.dat
+semanticdb/
+auto-save-list/
