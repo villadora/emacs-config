@@ -1,3 +1,13 @@
 ;; load preference & mode
 
+
+(setq exec-path (cons (expand-file-name "/usr/bin/") exec-path))
+
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
+
+;; load preference configuration
 (load-file (expand-file-name "~/.emacs.d/preference.el"))
+
+;; load mode configuration
+(load-file (expand-file-name "~/.emacs.d/modes.el"))

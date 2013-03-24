@@ -4,6 +4,8 @@
 ;; Date: 2010-10-28
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Perforce
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -82,8 +84,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CEDET -- Collection of Emacs Development Environment Tools
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/cedet-1.0pre7/common"))
-(load-file (expand-file-name "~/.custom/emacs.conf/cedet-1.0pre7/common/cedet.el"))
+;;(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/cedet-1.0pre7/common"))
+;;(load-file (expand-file-name "~/.custom/emacs.conf/cedet-1.0pre7/common/cedet.el"))
 
 ;; CEDET
 (require 'cedet)
@@ -178,38 +180,6 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; JDE -- Java Development Environment
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/jdee-2.4.0.1/lisp"))
-
-;; If you want Emacs to defer loading the JDE until you open a 
-;; Java file, edit the following line
-;; (setq defer-loading-jde nil)
-;; to read:
-;;
-(setq defer-loading-jde t)
-;;
-
-(if defer-loading-jde
-    (progn
-      (autoload 'jde-mode "jde" "JDE mode." t)
-      (setq auto-mode-alist
-	        (append
-		      '(("\\.java\\'" . jde-mode))
-		           auto-mode-alist)))
-  (require 'jde))
-
-
-;; Sets the basic indentation for Java source files
-;; to two spaces.
-(defun my-jde-mode-hook ()
-  (setq c-basic-offset 2))
-
-(add-hook 'jde-mode-hook 'my-jde-mode-hook)
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C/C++ Mode Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C++ mode
@@ -262,7 +232,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ruby mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (expand-file-name "/ms/dist/ruby/misc"))
+;;(add-to-list 'load-path (expand-file-name "/ms/dist/ruby/misc"))
 
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 
@@ -415,10 +385,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Nxml Mode 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/nxml-mode"))
+;;(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/nxml-mode"))
 
 ;; Make sure nxml-mode can autoload
-(load "~/.custom/emacs.conf/nxml-mode/rng-auto.el")
+;;(load "~/.custom/emacs.conf/nxml-mode/rng-auto.el")
 
 ;; Load nxml-mode for files ending in .xml, .xsl, .rng, .xhtml
 (add-to-list 'auto-mode-alist '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\)\\'" . nxml-mode))
@@ -450,7 +420,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Actionscript Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(load-file  (expand-file-name "~/.custom/emacs.conf/actionscript-mode-connors.el"))
+(load-file  (expand-file-name "~/.emacs.d/actionscript-mode-connors.el"))
 (add-to-list 'auto-mode-alist '("\\.\\(as\\|mxml\\)$" . actionscript-mode))
 ;;(require 'actionscript-mode)
 
@@ -458,7 +428,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; YAML Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(load-file (expand-file-name "~/.custom/emacs.conf/yaml-mode.el"))
+(require 'yaml-mode)
 
 (add-hook 'yaml-mode-hook '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))) 
 
@@ -467,7 +437,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Scala Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/scala-mode"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/scala-mode"))
 (require 'scala-mode-auto)
 (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
 ;;(add-to-list 'load-path "/path/to/ensime/dist")
@@ -479,9 +449,9 @@
 ;; Auto-complete Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/auto-complete"))
-
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.custom/emacs.conf/auto-complete/ac-dict")
+
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/vendor/auto-complete/dict")
 (ac-config-default)
 (setq ac-use-quick-help t)
 
@@ -515,10 +485,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Haskell Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(load "~/.custom/emacs.conf/haskell-mode-2.8.0/haskell-site-file.el")
+;(load "~/.custom/emacs.conf/haskell-mode-2.8.0/haskell-site-file.el")
 
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
@@ -526,11 +496,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SCSS Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq exec-path (cons (expand-file-name "/ms/dist/ruby/PROJ/gems/common/bin/") exec-path))
-
 (setq scss-compile-at-save nil)
 
-(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/"))
 (autoload 'scss-mode "scss-mode")
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 (add-to-list 'ac-modes 'scss-mode)
