@@ -4,3 +4,12 @@
 [submodule "vendor/solarized-color"]
 	path = vendor/solarized-color
 	url = https://github.com/sellout/emacs-color-theme-solarized.git
+[submodule "vendor/scss-mode"]
+	path = vendor/scss-mode
+	url = https://github.com/antonj/scss-mode.git
+[submodule "vendor/haml-mode"]
+	path = vendor/haml-mode
+	url = https://github.com/nex3/haml-mode.git
+[submodule "vendor/yasnippet"]
+	path = vendor/yasnippet
+	url = https://github.com/capitaomorte/yasnippet.git
