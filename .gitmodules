@@ -1,0 +1,6 @@
+[submodule "vendor/emacs-powerline"]
+	path = vendor/emacs-powerline
+	url = https://github.com/jonathanchu/emacs-powerline.git
+[submodule "vendor/solarized-color"]
+	path = vendor/solarized-color
+	url = https://github.com/sellout/emacs-color-theme-solarized.git
