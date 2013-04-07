@@ -243,6 +243,7 @@
 ;; Ruby mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;(add-to-list 'load-path (expand-file-name "/ms/dist/ruby/misc"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/ruby-electric"))
 
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 
@@ -258,6 +259,9 @@
         ))
 
 (setq ruby-indent-level 2)
+
+(require 'ruby-electric)
+(add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Perl Mode Settings
@@ -518,5 +522,23 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/haml-mode"))
 (require 'haml-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Yasnippet Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/yasnippet"))
+
+(require 'yasnippet)
+(yas-global-mode t)
+
+
+;;(yas-reload-all)
+
+;;(setq yas-snippet-dirs
+;;      '("~/.emacs.d/snippets"            ;; personal snippets
+;;        "/path/to/some/collection/"      ;; just some foo-mode snippets
+;;        "/path/to/some/othercollection/" ;; some more foo-mode and a complete baz-mode
+;;        "/path/to/yasnippet/snippets"    ;; the default collection
+;;        ))
 
 

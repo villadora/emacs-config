@@ -13,3 +13,6 @@
 [submodule "vendor/yasnippet"]
 	path = vendor/yasnippet
 	url = https://github.com/capitaomorte/yasnippet.git
+[submodule "vendor/ruby-electric"]
+	path = vendor/ruby-electric
+	url = https://github.com/qoobaa/ruby-electric.git
