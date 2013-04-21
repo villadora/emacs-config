@@ -47,15 +47,21 @@
 ;; turn on font-lock mode
 (global-font-lock-mode t)
 
-;;enable visual feedback on selections
+;; enable visual feedback on selections
 (setq-default transient-mark-mode t)
 
-;;disable the welcome screen
+;; disable the welcome screen
 (setq inhibit-startup-message t)
 
 (setq gdb-many-windows t) 
 (setq column-number-mode t)
 (setq line-number-mode t)
+
+;; disable tab indent
+(setq-default indent-tabs-mode nil)
+(setq c-basic-indent 4)
+(setq tab-width 4)
+
 
 ;; Show which function I am in
 (which-function-mode)
