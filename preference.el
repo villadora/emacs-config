@@ -15,6 +15,16 @@
 (global-set-key "\M-s" 'replace-string)
 ;(global-set-key [delete] 'delete-char)
 (global-set-key [f7] 'compile)
+  
+  ;; if in Mac switch alt command
+"""(if (eq system-type 'darwin)
+    ;; for OS X if true
+    (setq mac-option-key-is-meta nil
+        mac-command-key-is-meta t
+        mac-command-modifier 'meta
+        mac-option-modifier 'none)
+)
+"""
 
 ;; Line number
 (require 'linum)
@@ -204,6 +214,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Powerline
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/vendor/emacs-powerline")
-(require 'powerline)
-;;(powerline-default)
+;;(add-to-list 'load-path "~/.emacs.d/vendor/powerline")
+;;(require 'powerline)
+;;(powerline-default-theme)

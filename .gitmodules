@@ -16,3 +16,6 @@
 [submodule "vendor/ruby-electric"]
 	path = vendor/ruby-electric
 	url = https://github.com/qoobaa/ruby-electric.git
+[submodule "vendor/powerline"]
+	path = vendor/powerline
+	url = https://github.com/milkypostman/powerline.git

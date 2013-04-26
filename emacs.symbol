@@ -1,9 +1,17 @@
-;; load preference & mode
+;; Startup Config Files for emacs
+;;
+;;
+;; Load preference & mode configuration files
+;; 
+;; author: vaill.gao
 
+;; add usually bin path to exec-path
+(setq exec-path (cons (expand-file-name "/usr/bin/") 
+    (cons (expand-file-name "/usr/local/bin")
+	(cons (expand-file-name "/usr/local/sbin")
+	    exec-path))))
 
-(setq exec-path (cons (expand-file-name "/usr/bin/") exec-path))
-
-
+;; add default emacs configuration folder
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 
 ;; load preference configuration
