@@ -26,6 +26,9 @@
 )
 """
 
+;; show date time in statusbar
+(display-time-mode t)
+
 ;; Line number
 (require 'linum)
 (linum-mode t)
@@ -52,6 +55,11 @@
 ;; How to specify the color?
 (set-face-background 'hl-line "#222")
 ;;(set-face-foreground 'highlight "#111")
+
+;; Change Ctrl-Space to Meta-Space, avoid conflication with OS settings
+(global-unset-key (kbd "C-SPC"))  
+(global-set-key (kbd "M-SPC") 'set-mark-command)
+
 
 
 ;; turn on font-lock mode
@@ -212,8 +220,29 @@
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Customize extensions-2-modes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'auto-mode-alist '("\\.symlink$" . shell-script-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Powerline
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;(add-to-list 'load-path "~/.emacs.d/vendor/powerline")
-;;(require 'powerline)
-;;(powerline-default-theme)
+(if window-system
+     (progn
+       (add-to-list 'load-path "~/.emacs.d/vendor/emacs-powerline")
+       (require 'powerline)
+       ;;(powerline-nano-theme)))
+       (custom-set-faces
+        '(mode-line ((t (:foreground "#030303" :background "#ff99cc" :box nil))))
+        '(mode-line-inactive ((t (:foreground "#77f9f9" :background "#00aa0a" :box nil)))))
+       (setq powerline-color1 "#6600cc")
+       (setq powerline-color2 "#3366ff")
+       ))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; For different OS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;(cond 
+;; (memq system-type '(darwin)) ((progn )  load "mac.el")
+;;)
