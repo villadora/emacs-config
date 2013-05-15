@@ -37,6 +37,9 @@
 ;; set rmail-file-name
 
 
+;; enable electric-pair-mode
+(electric-pair-mode t)
+
 ;; highlight the matched parens
 ;;(setq show-paren-moe t)
 
