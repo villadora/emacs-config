@@ -19,3 +19,6 @@
 [submodule "vendor/powerline"]
 	path = vendor/powerline
 	url = https://github.com/milkypostman/powerline.git
+[submodule "vendor/anything"]
+	path = vendor/anything
+	url = git://repo.or.cz/anything-config.git

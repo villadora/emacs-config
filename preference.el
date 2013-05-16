@@ -232,7 +232,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (if window-system
      (progn
-       (add-to-list 'load-path "~/.emacs.d/vendor/emacs-powerline")
+       (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/emacs-powerline"))
        (require 'powerline)
        ;;(powerline-nano-theme)))
        (custom-set-faces
@@ -249,3 +249,11 @@
 ;;(cond 
 ;; (memq system-type '(darwin)) ((progn )  load "mac.el")
 ;;)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Anything
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/anything"))
+(require 'anything-config)
