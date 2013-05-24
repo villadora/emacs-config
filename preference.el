@@ -13,18 +13,13 @@
 (global-set-key "\C-x?" 'help-command)
 (global-set-key "\M-g" 'goto-line)
 (global-set-key "\M-s" 'replace-string)
-;(global-set-key [delete] 'delete-char)
+                                        ;(global-set-key [delete] 'delete-char)
 (global-set-key [f7] 'compile)
-  
-  ;; if in Mac switch alt command
-"""(if (eq system-type 'darwin)
+
+;; if in Mac switch alt command
+(if (string-equal system-type 'darwin)
     ;; for OS X if true
-    (setq mac-option-key-is-meta nil
-        mac-command-key-is-meta t
-        mac-command-modifier 'meta
-        mac-option-modifier 'none)
-)
-"""
+    (load-file  "~/.emacs.d/macos.el"))
 
 ;; show date time in statusbar
 (display-time-mode t)
@@ -37,13 +32,23 @@
 ;; set rmail-file-name
 
 
+;; set spell check with aspell
+(setq-default ispell-program-name "aspell")
+(ispell-change-dictionary "american" t)
+
 ;; enable electric-pair-mode
-(electric-pair-mode t)
+;;(electric-pair-mode t)
 
 ;; highlight the matched parens
 ;;(setq show-paren-moe t)
 
 
+;; save desktop on exit
+(desktop-save-mode 1)
+
+;; enable session.el
+(require 'session)
+(add-hook 'after-init-hook 'session-initialize)
 
 ;; shift+arrow to select text
 (setq shift-select-mode t)
@@ -51,7 +56,6 @@
 
 ;; down arrow key by visual line
 (setq line-move-visual t)
-
 
 ;; highlight current line
 (global-hl-line-mode nil)
@@ -152,8 +156,8 @@
 (make-directory "/tmp/emacs.bk/autosaves/" t)
 (make-directory "/tmp/emacs.bk/backups/" t)
 (custom-set-variables
-  '(auto-save-file-name-transforms '((".*" "/tmp/emacs.bk/autosaves/\\1" t)))
-  '(backup-directory-alist '((".*" . "/tmp/emacs.bk/backups/"))))
+ '(auto-save-file-name-transforms '((".*" "/tmp/emacs.bk/autosaves/\\1" t)))
+ '(backup-directory-alist '((".*" . "/tmp/emacs.bk/backups/"))))
 
 
 ;; ;; create the autosave dir if necessary, since emacs won't.
@@ -231,16 +235,16 @@
 ;; Powerline
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (if window-system
-     (progn
-       (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/emacs-powerline"))
-       (require 'powerline)
-       ;;(powerline-nano-theme)))
-       (custom-set-faces
-        '(mode-line ((t (:foreground "#030303" :background "#ff99cc" :box nil))))
-        '(mode-line-inactive ((t (:foreground "#77f9f9" :background "#00aa0a" :box nil)))))
-       (setq powerline-color1 "#6600cc")
-       (setq powerline-color2 "#3366ff")
-       ))
+    (progn
+      (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/emacs-powerline"))
+      (require 'powerline)
+      ;;(powerline-nano-theme)))
+      (custom-set-faces
+       '(mode-line ((t (:foreground "#030303" :background "#ff99cc" :box nil))))
+       '(mode-line-inactive ((t (:foreground "#77f9f9" :background "#00aa0a" :box nil)))))
+      (setq powerline-color1 "#6600cc")
+      (setq powerline-color2 "#3366ff")
+      ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; For different OS

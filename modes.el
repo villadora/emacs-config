@@ -246,6 +246,7 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/ruby-electric"))
 
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("^Rakefile$" . ruby-mode))
 
 (autoload 'ruby-mode "ruby-mode" "Mode for editing ruby source files" t)
 (autoload 'run-ruby "inf-ruby"
@@ -256,12 +257,13 @@
 	  '(lambda ()
         (inf-ruby-keys)
         (font-lock-mode)
+        (flyspell-prog-mode)
         ))
 
-(setq ruby-indent-level 2)
+(setq ruby-indent-level 4)
 
-(require 'ruby-electric)
-(add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
+;;(require 'ruby-electric)
+;(add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Perl Mode Settings
@@ -514,7 +516,7 @@
 (setq scss-compile-at-save nil)
 
 (autoload 'scss-mode "scss-mode")
-(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+(add-to-list 'auto-mode-alist '("\\.scss$\\'" . scss-mode))
 (add-to-list 'ac-modes 'scss-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -522,6 +524,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/haml-mode"))
 (require 'haml-mode)
+(setq haml-indent-offset 4)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Yasnippet Mode
@@ -541,4 +544,20 @@
 ;;        "/path/to/yasnippet/snippets"    ;; the default collection
 ;;        ))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Auto Load Markdown Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(autoload 'markdown-mode "markdown-mode.el"
+  "Major mode for editing Markdown files" t)
 
+(add-to-list 'auto-mode-alist '("\\.md$\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown$\\'" . markdown-mode))
+(add-to-list 'ac-modes 'markdown-mode)
+
+
+;; enable flyspell to markdown mode
+(defun markdown-spellmode ()
+  "markdown-mode-hook"
+  (flyspell-mode t))
+
+(add-hook 'markdown-mode-hook '(lambda() (markdown-spellmode)))
