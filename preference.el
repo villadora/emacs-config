@@ -8,13 +8,6 @@
 ;; Preferences
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Global Key Settings
-;;(global-set-key "\C-h" 'backward-delete-char)
-(global-set-key "\C-x?" 'help-command)
-(global-set-key "\M-g" 'goto-line)
-(global-set-key "\M-s" 'replace-string)
-                                        ;(global-set-key [delete] 'delete-char)
-(global-set-key [f7] 'compile)
 
 ;; if in Mac switch alt command
 (if (string-equal system-type 'darwin)
@@ -63,11 +56,6 @@
 (set-face-background 'hl-line "#222")
 ;;(set-face-foreground 'highlight "#111")
 
-;; Change Ctrl-Space to Meta-Space, avoid conflication with OS settings
-(global-unset-key (kbd "C-SPC"))  
-(global-set-key (kbd "M-SPC") 'set-mark-command)
-
-
 
 ;; turn on font-lock mode
 (global-font-lock-mode t)
@@ -93,6 +81,34 @@
 
 ;; Show Paren
 (show-paren-mode t)
+
+;; Enhancement for cut/copy, to cut/copy the current line if no text selection
+(defun copy-line-or-region ()
+  "Copy current line, or current text selection."
+  (interactive)
+  (if (region-active-p)
+      (kill-ring-save (region-beginning) (region-end))
+    (kill-ring-save (line-beginning-position) (line-beginning-position 2)) ) )
+
+(defun cut-line-or-region ()
+  "Cut the current line, or current text selection."
+  (interactive)
+  (if (region-active-p)
+      (kill-region (region-beginning) (region-end))
+    (kill-region (line-beginning-position) (line-beginning-position 2)) ) )
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Global Key Settings
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(global-set-key "\C-h" 'backward-delete-char)
+(global-set-key "\C-x?" 'help-command)
+(global-set-key "\M-g" 'goto-line)
+(global-set-key "\M-s" 'replace-string)
+;;(global-set-key [delete] 'delete-char)
+(global-set-key [f7] 'compile)
+(global-set-key (kbd "C-S-k") 'kill-whole-line)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Color Theme

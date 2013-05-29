@@ -199,8 +199,8 @@
 (if first-time
     (setq auto-mode-alist
       (append '(
-		("\\.cpp$" . c++-mode)
-		("\\.hpp$" . c++-mode)
+		("\\.cpp\\'" . c++-mode)
+		("\\.hpp\\'" . c++-mode)
 		("\\.lsp$" . lisp-mode)
 		("\\.scm$" . scheme-mode)
 		) auto-mode-alist)))
@@ -245,8 +245,8 @@
 ;;(add-to-list 'load-path (expand-file-name "/ms/dist/ruby/misc"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/ruby-electric"))
 
-(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("^Rakefile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("^Rakefile\\'" . ruby-mode))
 
 (autoload 'ruby-mode "ruby-mode" "Mode for editing ruby source files" t)
 (autoload 'run-ruby "inf-ruby"
@@ -385,6 +385,9 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
 ;;    (autoload 'javascript-mode "javascript" nil t)
 
+;;(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;;(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -437,7 +440,7 @@
 ;; Actionscript Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load-file  (expand-file-name "~/.emacs.d/actionscript-mode-connors.el"))
-(add-to-list 'auto-mode-alist '("\\.\\(as\\|mxml\\)$" . actionscript-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(as\\|mxml\\)\\'" . actionscript-mode))
 ;;(require 'actionscript-mode)
 
 
@@ -448,14 +451,14 @@
 
 (add-hook 'yaml-mode-hook '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))) 
 
-(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Scala Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/scala-mode"))
 (require 'scala-mode-auto)
-(add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
+(add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode))
 ;;(add-to-list 'load-path "/path/to/ensime/dist")
 ;;(require 'ensime)
 ;;(add-hook 'scala-mode-hook 'ensime-scala-mode-hook) 
@@ -516,7 +519,7 @@
 (setq scss-compile-at-save nil)
 
 (autoload 'scss-mode "scss-mode")
-(add-to-list 'auto-mode-alist '("\\.scss$\\'" . scss-mode))
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 (add-to-list 'ac-modes 'scss-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -550,8 +553,9 @@
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode for editing Markdown files" t)
 
-(add-to-list 'auto-mode-alist '("\\.md$\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown$\\'" . markdown-mode))
+(require 'markdown-mode)
+
+(add-to-list 'auto-mode-alist '("\\.\\(md\\|markdown\\)\\'" . markdown-mode))
 (add-to-list 'ac-modes 'markdown-mode)
 
 
