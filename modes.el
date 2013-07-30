@@ -463,34 +463,6 @@
 ;;(require 'ensime)
 ;;(add-hook 'scala-mode-hook 'ensime-scala-mode-hook) 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Yasnippet Mode
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/yasnippet"))
-
-(require 'yasnippet)
-
-
-;;(yas-reload-all)
-(setq yas-snippet-dirs
-      '("~/.emacs.d/snippets"
-        "~/.emacs.d/vendor/yasnippet/snippets"
-        ))
-
-(yas/set-ac-modes)
-(yas/enable-emacs-lisp-paren-hack)
-
-(yas/global-mode 1)
-(yas/minor-mode-on)
-
-
-;;(setq yas-snippet-dirs
-;;      '("~/.emacs.d/snippets"            ;; personal snippets
-;;        "/path/to/some/collection/"      ;; just some foo-mode snippets
-;;        "/path/to/some/othercollection/" ;; some more foo-mode and a complete baz-mode
-;;        "/path/to/yasnippet/snippets"    ;; the default collection
-;;        ))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Auto-complete Settings
@@ -531,22 +503,55 @@
 ;(set-face-background 'ac-selection-face "steelblue")cl
 
 (setq-default ac-source '(
-                         ac-source-yasnippet
-                         ac-source-filename
-                         ac-srouce-words-in-all-buffer
-                         ac-source-functions
-                         ac-source-variables
-                         ac-source-symbols
-                         ac-source-features
-                         ac-source-abbrev
-                         ac-source-words-in-same-mode-buffers
-                         ac-source-dictinary))
+                          ac-source-yasnippet
+                          ac-source-filename
+                          ac-srouce-words-in-all-buffer
+                          ac-source-functions
+                          ac-source-variables
+                          ac-source-symbols
+                          ac-source-features
+                          ac-source-abbrev
+                          ac-source-words-in-same-mode-buffers
+                          ac-source-dictinary))
 
 
 ;; add ac sources for c/c++ mode
 ;(add-hook 'c++-mode-hook (lambda() (add-to-list 'ac-sources 'ac-sources-semantic)))
 ;(add-hook 'c-mode-hook (lambda() (add-to-list 'ac-sources 'ac-sources-semantic)))
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Yasnippet Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/yasnippet"))
+
+(require 'yasnippet)
+
+
+;;(yas-reload-all)
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"
+        "~/.emacs.d/vendor/yasnippet/snippets"
+        ))
+
+(yas-global-mode t)
+
+;;(yas/set-ac-modes)
+;;(yas/enable-emacs-lisp-paren-hack)
+
+
+ 
+;;(yas/global-mode 1)
+;;(yas/minor-mode-on)
+
+
+;;(setq yas-snippet-dirs
+;;      '("~/.emacs.d/snippets"            ;; personal snippets
+;;        "/path/to/some/collection/"      ;; just some foo-mode snippets
+;;        "/path/to/some/othercollection/" ;; some more foo-mode and a complete baz-mode
+;;        "/path/to/yasnippet/snippets"    ;; the default collection
+;;        ))
 
 
 
@@ -597,3 +602,13 @@
   (flyspell-mode t))
 
 (add-hook 'markdown-mode-hook '(lambda() (markdown-spellmode)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Bison Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(autoload 'bison-mode "bison-mode.el" "Mode for bison/yacc" t)
+(add-to-list 'auto-mode-alist '("\\.y$" . bison-mode))
+
+(autoload 'flex-mode "flex-mode")
+(add-to-list 'auto-mode-alist '("\\.l$" . flex-mode))
