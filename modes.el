@@ -32,22 +32,25 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (outline-minor-mode 0)
 
-; Outline-minor-mode key map
+;; Outline-minor-mode key map
 (define-prefix-command 'cm-map nil "Outline-")
-; HIDE
+
+;; HIDE
 (define-key cm-map "q" 'hide-sublevels)    ; Hide everything but the top-level headings
 (define-key cm-map "t" 'hide-body)         ; Hide everything but headings (all body lines)
 (define-key cm-map "o" 'hide-other)        ; Hide other branches
 (define-key cm-map "c" 'hide-entry)        ; Hide this entry's body
 (define-key cm-map "l" 'hide-leaves)       ; Hide body lines in this entry and sub-entries
 (define-key cm-map "d" 'hide-subtree)      ; Hide everything in this entry and sub-entries
-; SHOW
+
+;; SHOW
 (define-key cm-map "a" 'show-all)          ; Show (expand) everything
 (define-key cm-map "e" 'show-entry)        ; Show this heading's body
 (define-key cm-map "i" 'show-children)     ; Show this heading's immediate child sub-headings
 (define-key cm-map "k" 'show-branches)     ; Show all sub-headings under this heading
 (define-key cm-map "s" 'show-subtree)      ; Show (expand) everything in this heading & below
-; MOVE
+
+;; MOVE
 (define-key cm-map "u" 'outline-up-heading)                ; Up
 (define-key cm-map "n" 'outline-next-visible-heading)      ; Next
 (define-key cm-map "p" 'outline-previous-visible-heading)  ; Previous
@@ -59,20 +62,20 @@
 ;;(add-hook 'outline-minor-mode-hook
 ;;	  (lambda ()
 ;;	     (
-	      ;; HIDE
+;; HIDE
 ;;	      (define-key outline-minor-mode-map "\M-oq" 'hide-sublevels)    ; Hide everything but the top-level headings
 ;;	      (define-key outline-minor-mode-map (kbd "M-o t") 'hide-body)         ; Hide everything but headings (all body lines)
 ;;	      (define-key outline-minor-mode-map (kbd "M-o o") 'hide-other)        ; Hide other branches
 ;;	      (define-key outline-minor-mode-map (kbd "M-o c") 'hide-entry)        ; Hide this entry's body
 ;;	      (define-key outline-minor-mode-map (kbd "M-o l") 'hide-leaves)       ; Hide body lines in this entry and sub-entries
 ;;	      (define-key outline-minor-mode-map (kbd "M-o d") 'hide-subtree)      ; Hide everything in this entry and sub-entries
-	      ;; SHOW
+;; SHOW
 ;;	      (define-key outline-minor-mode-map (kbd "M-o a") 'show-all)          ; Show (expand) everything
 ;;	      (define-key outline-minor-mode-map (kbd "M-o e") 'show-entry)        ; Show this heading's body
 ;;	      (define-key outline-minor-mode-map (kbd "M-o i") 'show-children)     ; Show this heading's immediate child sub-headings
 ;;	      (define-key outline-minor-mode-map (kbd "M-o k") 'show-branches)     ; Show all sub-headings under this heading
-;	      (define-key outline-minor-mode-map (kbd "M-o s") 'show-subtree)      ; Show (expand) everything in this heading & below
-	      ;; MOVE
+                                        ;	      (define-key outline-minor-mode-map (kbd "M-o s") 'show-subtree)      ; Show (expand) everything in this heading & below
+;; MOVE
 ;;	      (define-key outline-minor-mode-map (kbd "M-o u") 'outline-up-heading)                ; Up
 ;;	      (define-key outline-minor-mode-map (kbd "M-o n") 'outline-next-visible-heading)      ; Next
 ;;	      (define-key outline-minor-mode-map (kbd "M-o p") 'outline-previous-visible-heading)  ; Previous
@@ -96,9 +99,9 @@
 ;;-----------------------------------------
 ;; Semantic (exten)
 ;;-----------------------------------------
-;;(load-file  (expand-file-name "~/.emacs.d/cedet.el"))
 
-; set semantic-mode
+;;(load-file  (expand-file-name "~/.emacs.d/cedet.el"))
+;; set semantic-mode
 
 (custom-set-variables
  '(semantic-default-submodes 
@@ -125,7 +128,7 @@
 (defconst cedet-user-include-dirs
   (list ".." "../include" "../inc" "../common" "../public"
         "../.." "../../include" "../../inc" "../../common" "../../public")
-	;;	"/ms/dist/mstk/PROJ/msparts/5.0/include")
+  ;;	"/ms/dist/mstk/PROJ/msparts/5.0/include")
   ;;  (list "." ".." "/ms/dev/OR/etsProduct/4.0/src" "/ms/dist/mstk/PROJ/msparts/4.0/include")
   )
 
@@ -143,7 +146,7 @@
 
 ;; key settings for cedet
 (defun my-cedet-hook ()
-;;  (local-set-key (kbd "M-n") 'semantic-ia-complete-symbol)
+  ;;  (local-set-key (kbd "M-n") 'semantic-ia-complete-symbol)
   (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
   (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
 
@@ -198,12 +201,12 @@
 
 (if first-time
     (setq auto-mode-alist
-      (append '(
-		("\\.cpp\\'" . c++-mode)
-		("\\.hpp\\'" . c++-mode)
-		("\\.lsp$" . lisp-mode)
-		("\\.scm$" . scheme-mode)
-		) auto-mode-alist)))
+          (append '(
+                    ("\\.cpp\\'" . c++-mode)
+                    ("\\.hpp\\'" . c++-mode)
+                    ("\\.lsp$" . lisp-mode)
+                    ("\\.scm$" . scheme-mode)
+                    ) auto-mode-alist)))
 
 ;; C++ and C mode hook
 (defun my-c++-mode-hook ()
@@ -211,13 +214,13 @@
   (define-key c++-mode-map "\C-m" 'reindent-then-newline-and-indent)
   (define-key c++-mode-map "\C-ce" 'c-comment-edit)
   (setq c++-auto-hungry-initial-state t)
-  ;(setq c++-delete-function 'backward-delete-char)
-  ; (setq c++-tab-always-indent t)
+  ;; (setq c++-delete-function 'backward-delete-char)
+  ;; (setq c++-tab-always-indent t)
   (setq indent-tabs-mode nil)
   (setq c-indent-level 4)
   (setq c-continued-statement-offset 4)
   (setq c++-empty-arglist-indent 4))
-  (setq c-brace-offset 0)
+(setq c-brace-offset 0)
 
 (defun my-c-mode-hook ()
   (setq tab-width 4)
@@ -226,7 +229,7 @@
   (setq c-auto-hungry-initial-state 'none)
   (setq c-delete-function 'backward-delete-char)
   (setq c-tab-always-indent t)
-;; BSD-ish indentation style
+  ;; BSD-ish indentation style
   (setq c-indent-level 4)
   (setq c-continued-statement-offset 4)
   (setq c-brace-offset 0)
@@ -255,15 +258,15 @@
   "Set local key defs for inf-ruby in ruby-mode")
 (add-hook 'ruby-mode-hook
 	  '(lambda ()
-        (inf-ruby-keys)
-        (font-lock-mode)
-        (flyspell-prog-mode)
-        ))
+             (inf-ruby-keys)
+             (font-lock-mode)
+             (flyspell-prog-mode)
+             ))
 
 (setq ruby-indent-level 4)
 
 ;;(require 'ruby-electric)
-;(add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
+;;(add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Perl Mode Settings
@@ -287,11 +290,11 @@
        "[ \\t]*"                        ; Skip leading whitespace
        "\\("                            ; begin capture group \1
        (mapconcat 'identity '(
-             "=head[12]"                  ; POD header
-             "package"                    ; package
-             "=item"                      ; POD item
-             "sub"                        ; subroutine definition
-	     ) "\\|")
+                              "=head[12]"                  ; POD header
+                              "package"                    ; package
+                              "=item"                      ; POD item
+                              "sub"                        ; subroutine definition
+                              ) "\\|")
        "\\)"                            ; end capture group \1
        "\\b"                            ; Word boundary
        ))
@@ -303,12 +306,12 @@
        "[ \\t]*"                        ; Skip leading whitespace
        "\\("                            ; begin capture group \1
        (mapconcat 'identity '(
-             "=head[12]"                  ;     POD header
-             "package"                    ;     package
-             "=item"                      ;     POD item
-             "sub"                        ;     subroutine definition
-             "if" "else" "unless" "while" "until" "return"
-	     ) "\\|")
+                              "=head[12]"                  ;     POD header
+                              "package"                    ;     package
+                              "=item"                      ;     POD item
+                              "sub"                        ;     subroutine definition
+                              "if" "else" "unless" "while" "until" "return"
+                              ) "\\|")
        "\\)"                            ; end capture group \1
        "\\b"                            ; Word boundary
        ))
@@ -335,7 +338,7 @@
   (setq cperl-outline-regexp  my-cperl-outline-regexp)
   (setq outline-regexp        cperl-outline-regexp)
   (setq outline-level        'cperl-outline-level)
-)
+  )
 
 
 
@@ -382,12 +385,100 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Javascript Mode Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
 ;;    (autoload 'javascript-mode "javascript" nil t)
 
-;;(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-;;(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+(autoload 'espresso-mode "espresso")
 
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/js2-mode"))
+
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+
+(defun my-js2-mode-hook ()
+  (require 'espresso)
+  (setq espresso-indent-level 4
+        indent-tabs-mode nil
+        c-basic-offset 8)
+  (c-toggle-auto-state 0)
+  (c-toggle-hungry-state 1)
+  (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
+  (define-key js2-mode-map [(meta control |)] 'cperl-lineup)
+  (define-key js2-mode-map [(meta control \;)] 
+    '(lambda()
+       (interactive)
+       (insert "/* -----[ ")
+       (save-excursion
+         (insert " ]----- */"))
+       ))
+  (define-key js2-mode-map [(return)] 'newline-and-indent)
+  (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
+  (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
+  (define-key js2-mode-map [(control meta q)] 'my-indent-sexp)
+  (if (featurep 'js2-highlight-vars)
+      (js2-highlight-vars-mode))
+  (message "js2-mode"))
+
+;; add js2 hook
+(add-hook 'js2-mode-hook 'my-js2-mode-hook)
+
+
+;; M-C-q to indent following block
+(defun my-indent-sexp ()
+  (interactive)
+  (save-restriction
+    (save-excursion
+      (widen)
+      (let* ((inhibit-point-motion-hooks t)
+             (parse-status (syntax-ppss (point)))
+             (beg (nth 1 parse-status))
+             (end-marker (make-marker))
+             (end (progn (goto-char beg) (forward-list) (point)))
+             (ovl (make-overlay beg end)))
+        (set-marker end-marker end)
+        (overlay-put ovl 'face 'highlight)
+        (goto-char beg)
+        (while (< (point) (marker-position end-marker))
+          ;; don't reindent blank lines so we don't set the "buffer
+          ;; modified" property for nothing
+          (beginning-of-line)
+          (unless (looking-at "\\s-*$")
+            (indent-according-to-mode))
+          (forward-line))
+        (run-with-timer 0.5 nil '(lambda(ovl)
+                                   (delete-overlay ovl)) ovl)))))
+
+;; fix js2-indent
+(defun my-js2-indent-function ()
+  (interactive)
+  (save-restriction
+    (widen)
+    (let* ((inhibit-point-motion-hooks t)
+           (parse-status (save-excursion (syntax-ppss (point-at-bol))))
+           (offset (- (current-column) (current-indentation)))
+           (indentation (espresso--proper-indentation parse-status))
+           node)
+
+      (save-excursion
+        ;; I like to indent case and labels to half of the tab width
+        (back-to-indentation)
+        (if (looking-at "case\\s-")
+            (setq indentation (+ indentation (/ espresso-indent-level 2))))
+        ;; consecutive declarations in a var statement are nice if
+        ;; properly aligned, (I love this much)i.e:
+        ;;
+        ;; var foo = "bar",
+        ;;     bar = "foo";
+        (setq node (js2-node-at-point))
+        (when (and node
+                   (= js2-NAME (js2-node-type node))
+                   (= js2-VAR (js2-node-type (js2-node-parent node))))
+          (setq indentation (+ 4 indentation))))
+      
+      (indent-line-to indentation)
+      (when (> offset 0) (forward-char offset)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -498,9 +589,9 @@
 
 
 ;; color setting
-;(set-face-background 'ac-candidate-face "lightgray")
-;(set-face-underline 'ac-candidate-face "darkgray")
-;(set-face-background 'ac-selection-face "steelblue")cl
+;;(set-face-background 'ac-candidate-face "lightgray")
+;;(set-face-underline 'ac-candidate-face "darkgray")
+;;(set-face-background 'ac-selection-face "steelblue")cl
 
 (setq-default ac-source '(
                           ac-source-yasnippet
@@ -516,8 +607,8 @@
 
 
 ;; add ac sources for c/c++ mode
-;(add-hook 'c++-mode-hook (lambda() (add-to-list 'ac-sources 'ac-sources-semantic)))
-;(add-hook 'c-mode-hook (lambda() (add-to-list 'ac-sources 'ac-sources-semantic)))
+;;(add-hook 'c++-mode-hook (lambda() (add-to-list 'ac-sources 'ac-sources-semantic)))
+;;(add-hook 'c-mode-hook (lambda() (add-to-list 'ac-sources 'ac-sources-semantic)))
 
 
 
@@ -541,7 +632,7 @@
 ;;(yas/enable-emacs-lisp-paren-hack)
 
 
- 
+
 ;;(yas/global-mode 1)
 ;;(yas/minor-mode-on)
 
@@ -558,7 +649,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Haskell Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;(load "~/.custom/emacs.conf/haskell-mode-2.8.0/haskell-site-file.el")
+;;(load "~/.custom/emacs.conf/haskell-mode-2.8.0/haskell-site-file.el")
 
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
