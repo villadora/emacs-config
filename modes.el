@@ -628,6 +628,7 @@
 
 (yas-global-mode t)
 
+(setq ac-source-yasnippet nil)
 ;;(yas/set-ac-modes)
 ;;(yas/enable-emacs-lisp-paren-hack)
 
