@@ -704,3 +704,15 @@
 
 (autoload 'flex-mode "flex-mode")
 (add-to-list 'auto-mode-alist '("\\.l$" . flex-mode))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Know Your HTTP
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/know-your-http"))
+(require 'know-your-http-well)
+;; M-x http-headers ;; content-type
+;; M-x http-method ;; post
+;; M-x http-relation ;; describedby
+;; M-x http-status-code ;; 500
+;; M-x http-status-code ;; not_found
