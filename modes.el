@@ -193,6 +193,42 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Yasnippet Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/yasnippet"))
+
+(require 'yasnippet)
+
+
+;;(yas-reload-all)
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"
+        "~/.emacs.d/vendor/yasnippet/snippets"
+        ))
+
+(yas-global-mode t)
+
+(setq ac-source-yasnippet nil)
+;;(yas/set-ac-modes)
+;;(yas/enable-emacs-lisp-paren-hack)
+
+
+
+;;(yas/global-mode 1)
+;;(yas/minor-mode-on)
+
+
+;;(setq yas-snippet-dirs
+;;      '("~/.emacs.d/snippets"            ;; personal snippets
+;;        "/path/to/some/collection/"      ;; just some foo-mode snippets
+;;        "/path/to/some/othercollection/" ;; some more foo-mode and a complete baz-mode
+;;        "/path/to/yasnippet/snippets"    ;; the default collection
+;;        ))
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C/C++ Mode Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C++ mode
@@ -550,6 +586,14 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/scala-mode"))
 (require 'scala-mode-auto)
 (add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode))
+
+(add-hook 'scala-mode-hook
+          '(lambda () 
+             (yas/minor-mode-on)))
+
+
+(yas/load-directory (expand-file-name "~/.emacs.d/vendor/scala-mode/contrib/yasnippet/snippets"))
+
 ;;(add-to-list 'load-path "/path/to/ensime/dist")
 ;;(require 'ensime)
 ;;(add-hook 'scala-mode-hook 'ensime-scala-mode-hook) 
@@ -610,40 +654,6 @@
 ;;(add-hook 'c++-mode-hook (lambda() (add-to-list 'ac-sources 'ac-sources-semantic)))
 ;;(add-hook 'c-mode-hook (lambda() (add-to-list 'ac-sources 'ac-sources-semantic)))
 
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Yasnippet Mode
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/yasnippet"))
-
-(require 'yasnippet)
-
-
-;;(yas-reload-all)
-(setq yas-snippet-dirs
-      '("~/.emacs.d/snippets"
-        "~/.emacs.d/vendor/yasnippet/snippets"
-        ))
-
-(yas-global-mode t)
-
-(setq ac-source-yasnippet nil)
-;;(yas/set-ac-modes)
-;;(yas/enable-emacs-lisp-paren-hack)
-
-
-
-;;(yas/global-mode 1)
-;;(yas/minor-mode-on)
-
-
-;;(setq yas-snippet-dirs
-;;      '("~/.emacs.d/snippets"            ;; personal snippets
-;;        "/path/to/some/collection/"      ;; just some foo-mode snippets
-;;        "/path/to/some/othercollection/" ;; some more foo-mode and a complete baz-mode
-;;        "/path/to/yasnippet/snippets"    ;; the default collection
-;;        ))
 
 
 
