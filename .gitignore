@@ -3,4 +3,5 @@ ac-comphist.dat
 semanticdb/
 auto-save-list/
 elpa/
+url/
 .DS_Store
