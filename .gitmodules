@@ -25,3 +25,9 @@
 [submodule "vendor/js2-mode"]
 	path = vendor/js2-mode
 	url = git@github.com:mooz/js2-mode.git
+[submodule "vendor/jade-mode"]
+	path = vendor/jade-mode
+	url = git@github.com:brianc/jade-mode.git
+[submodule "vendor/web-beautify"]
+	path = vendor/web-beautify
+	url = git@github.com:yasuyk/web-beautify.git

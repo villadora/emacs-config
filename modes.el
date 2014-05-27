@@ -232,6 +232,7 @@
 ;; C/C++ Mode Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C++ mode
+(message "loading c++ mode")
 (defvar first-time t
   "Flag signifying this is the first time that .emacs has been evaled")
 
@@ -281,6 +282,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ruby mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(message "loading ruby-mode")
+
 ;;(add-to-list 'load-path (expand-file-name "/ms/dist/ruby/misc"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/ruby-electric"))
 
@@ -304,10 +307,12 @@
 ;;(require 'ruby-electric)
 ;;(add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Perl Mode Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Use cperl-mode instead of perl-mode
+(message "loading perl-mode")
 (add-to-list 'auto-mode-alist '("\\.\\(pl\\|pm\\|PM\\)\\'" . cperl-mode))
 
 ;; Perl mode hook
@@ -385,13 +390,13 @@
 ;; ( Not available in the firm )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;(message "load python mode")
 ;;(add-to-list 'load-path "/ms/dev/python/Pymacs/0.23/src/Pymacs-0.23/")
 ;;(require 'pymacs)
 ;;(setq pymacs-load-path '("/ms/dev/python/rope/0.9.2/src/rope-0.9.2/rope"
 ;;          "/ms/dev/python/ropemacs/20100402/install/common/lib/ropemacs-0.6-py2.5.egg"
 ;;          "/ms/dev/python/ropemode/20100402/install/common/lib/ropemode-0.1_rc2-py2.5.egg"))
 ;;(pymacs-load "ropemacs" "rope-")
-
 
 
 
@@ -421,9 +426,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Javascript Mode Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(message "loading js2-mode")
 ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
 ;;    (autoload 'javascript-mode "javascript" nil t)
-
 (autoload 'espresso-mode "espresso")
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/js2-mode"))
@@ -435,9 +440,9 @@
 
 (defun my-js2-mode-hook ()
   (require 'espresso)
-  (setq espresso-indent-level 4
+  (setq espresso-indent-level 2
         indent-tabs-mode nil
-        c-basic-offset 8)
+        c-basic-offset 4)
   (c-toggle-auto-state 0)
   (c-toggle-hungry-state 1)
   (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
@@ -511,7 +516,7 @@
         (when (and node
                    (= js2-NAME (js2-node-type node))
                    (= js2-VAR (js2-node-type (js2-node-parent node))))
-          (setq indentation (+ 4 indentation))))
+          (setq indentation (+ 2 indentation))))
       
       (indent-line-to indentation)
       (when (> offset 0) (forward-char offset)))))
@@ -521,6 +526,7 @@
 ;; Org Mode Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; The following lines are always needed.  Choose your own keys.
+(message "loading org-mode")
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
 (global-set-key "\C-cl" 'org-store-link)
@@ -531,6 +537,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Nxml Mode 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(message "loading nxml-mode")
 ;;(add-to-list 'load-path (expand-file-name "~/.custom/emacs.conf/nxml-mode"))
 
 ;; Make sure nxml-mode can autoload
@@ -544,6 +551,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Html Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(message "loading html-mode")
 """(defun my-html-mode-hook ()
   (setq tab-width 4)
   (setq indent-tabs-mode t)"""
@@ -566,6 +574,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Actionscript Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(message "loading actionscript-mode")
 (load-file  (expand-file-name "~/.emacs.d/actionscript-mode-connors.el"))
 (add-to-list 'auto-mode-alist '("\\.\\(as\\|mxml\\)\\'" . actionscript-mode))
 ;;(require 'actionscript-mode)
@@ -574,6 +583,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; YAML Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(message "loading yaml-mode")
 (require 'yaml-mode)
 
 (add-hook 'yaml-mode-hook '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))) 
@@ -583,6 +593,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Scala Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(message "loading scala-mode")
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/scala-mode"))
 (require 'scala-mode-auto)
 (add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode))
@@ -602,6 +613,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Auto-complete Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(message "loading auto-complete mode")
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/auto-complete"))
 (require 'auto-complete-config)
 
@@ -671,6 +683,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SCSS Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(message "loading scss mode")
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/scss-mode"))
 (setq scss-compile-at-save nil)
 
@@ -681,6 +694,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HAML Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(message "loading haml mode")
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/haml-mode"))
 (require 'haml-mode)
 (setq haml-indent-offset 4)
@@ -689,6 +703,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Auto Load Markdown Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(message "loading markdown mode")
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode for editing Markdown files" t)
 
@@ -709,6 +724,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bison Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(message "loading bison mode")
 (autoload 'bison-mode "bison-mode.el" "Mode for bison/yacc" t)
 (add-to-list 'auto-mode-alist '("\\.y$" . bison-mode))
 
@@ -719,6 +735,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Know Your HTTP
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(message "loading know-your-http")
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/know-your-http"))
 (require 'know-your-http-well)
 ;; M-x http-headers ;; content-type
@@ -726,3 +743,15 @@
 ;; M-x http-relation ;; describedby
 ;; M-x http-status-code ;; 500
 ;; M-x http-status-code ;; not_found
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Jade & Stylus Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(message "loading jade mode")
+;;(add-to-list 'load-path "~/.emacs.d/vendor/jade-mode")
+;;(require 'sws-mode)
+;;(require 'jade-mode)
+;;(add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
+;;(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+

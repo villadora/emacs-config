@@ -288,3 +288,15 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 (package-initialize)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Web Beautify
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/web-beautify"))
+;;(require 'web-beautify) ;; Not necessary if using ELPA package
+;;(eval-after-load 'js2-mode
+;;  '(define-key js2-mode-map (kbd "C-c C-b") 'web-beautify-js))
+;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
+;; (eval-after-load 'js
+;;  '(define-key js-mode-map (kbd "C-c C-b") 'web-beautify-js))
